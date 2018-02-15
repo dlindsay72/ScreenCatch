@@ -1,24 +1,129 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13122.16" systemVersion="17A277" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13104.12"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Futura.ttc">
+            <string>Futura-CondensedExtraBold</string>
+            <string>Futura-CondensedMedium</string>
+            <string>Futura-Medium</string>
+        </array>
+    </customFonts>
     <scenes>
         <!--View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="ScreenCatch" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ready to Record" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZDD-Ej-pRU">
+                                <rect key="frame" x="104.5" y="37" width="167.5" height="40"/>
+                                <fontDescription key="fontDescription" name="Futura-CondensedMedium" family="Futura" pointSize="33"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="orZ-k9-iUX">
+                                <rect key="frame" x="16" y="85.5" width="343" height="41"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="ifk-FK-s9Y">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="60"/>
+                                    </constraint>
+                                </constraints>
+                                <segments>
+                                    <segment title="Skate"/>
+                                    <segment title="Food"/>
+                                    <segment title="Cat"/>
+                                    <segment title="Nature"/>
+                                </segments>
+                                <color key="tintColor" red="0.1824951172" green="0.70132345289999998" blue="0.31004315609999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <connections>
+                                    <action selector="imagePicked:" destination="BYZ-38-t0r" eventType="valueChanged" id="i3p-mt-CQw"/>
+                                </connections>
+                            </segmentedControl>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="S9M-oE-240">
+                                <rect key="frame" x="138" y="599" width="100" height="58"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="100" id="Ugl-E9-eAB">
+                                        <variation key="heightClass=regular-widthClass=regular" constant="200"/>
+                                    </constraint>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="Futura-CondensedExtraBold" family="Futura" pointSize="28"/>
+                                <state key="normal" title="Record">
+                                    <color key="titleColor" red="0.1824951172" green="0.70132345289999998" blue="0.31004315609999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                                <variation key="heightClass=regular-widthClass=regular">
+                                    <fontDescription key="fontDescription" name="Futura-CondensedExtraBold" family="Futura" pointSize="40"/>
+                                </variation>
+                                <connections>
+                                    <action selector="recordBtnWasPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="J3Y-J6-Apj"/>
+                                </connections>
+                            </button>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="center" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="F0J-Ko-h7Q">
+                                <rect key="frame" x="112" y="533.5" width="151" height="57.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Microphone Access" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="abm-Ji-FsY">
+                                        <rect key="frame" x="0.0" y="0.0" width="151" height="22.5"/>
+                                        <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="n5b-zf-lbg">
+                                        <rect key="frame" x="51" y="26.5" width="51" height="31"/>
+                                        <color key="onTintColor" red="0.1824951172" green="0.70132345289999998" blue="0.31004315609999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </switch>
+                                </subviews>
+                                <variation key="heightClass=regular-widthClass=regular" spacing="10"/>
+                            </stackView>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="nature" translatesAutoresizingMaskIntoConstraints="NO" id="miq-dX-k3e">
+                                <rect key="frame" x="16" y="153.5" width="343" height="360"/>
+                            </imageView>
+                        </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="F0J-Ko-h7Q" firstAttribute="top" secondItem="miq-dX-k3e" secondAttribute="bottom" constant="20" id="2GC-ng-0PW">
+                                <variation key="heightClass=regular-widthClass=regular" constant="40"/>
+                            </constraint>
+                            <constraint firstItem="miq-dX-k3e" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="4Zw-SY-bki"/>
+                            <constraint firstAttribute="bottomMargin" secondItem="S9M-oE-240" secondAttribute="bottom" constant="10" id="5IM-is-zit"/>
+                            <constraint firstItem="ZDD-Ej-pRU" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="6Pd-rc-vFJ"/>
+                            <constraint firstItem="ZDD-Ej-pRU" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="17" id="Fyg-Sg-PyV"/>
+                            <constraint firstItem="miq-dX-k3e" firstAttribute="leading" secondItem="orZ-k9-iUX" secondAttribute="leading" id="MZC-kD-IJy"/>
+                            <constraint firstItem="S9M-oE-240" firstAttribute="top" secondItem="F0J-Ko-h7Q" secondAttribute="bottom" constant="8.5" id="SfB-GS-a48">
+                                <variation key="heightClass=regular-widthClass=regular" constant="12"/>
+                            </constraint>
+                            <constraint firstItem="miq-dX-k3e" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="V1E-Qf-NBS"/>
+                            <constraint firstItem="miq-dX-k3e" firstAttribute="top" secondItem="orZ-k9-iUX" secondAttribute="bottom" constant="28" id="ZvS-ey-End"/>
+                            <constraint firstItem="orZ-k9-iUX" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="16" id="eBL-5F-pH6"/>
+                            <constraint firstItem="S9M-oE-240" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="fDh-mx-ofk"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="orZ-k9-iUX" secondAttribute="trailing" constant="16" id="lKg-i4-wYo"/>
+                            <constraint firstItem="F0J-Ko-h7Q" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="sYa-e7-X9j"/>
+                        </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="imagePicker" destination="orZ-k9-iUX" id="sEw-W3-kTR"/>
+                        <outlet property="micSwitch" destination="n5b-zf-lbg" id="UvO-6T-wiM"/>
+                        <outlet property="recordBtn" destination="S9M-oE-240" id="3xd-ol-mID"/>
+                        <outlet property="selectedImage" destination="miq-dX-k3e" id="wX8-N9-N96"/>
+                        <outlet property="statusLbl" destination="ZDD-Ej-pRU" id="U6r-oU-L37"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="117.59999999999999" y="118.29085457271366"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="nature" width="640" height="360"/>
+    </resources>
 </document>
