@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import ReplayKit
 
 class ViewController: UIViewController {
     
@@ -16,6 +17,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var recordBtn: UIButton!
     @IBOutlet weak var micSwitch: UISwitch!
     @IBOutlet weak var selectedImage: UIImageView!
+    
+    var recorder = RPScreenRecorder.shared()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +30,18 @@ class ViewController: UIViewController {
     }
     
     @IBAction func imagePicked(_ sender: UISegmentedControl) {
-        
+        switch sender.selectedSegmentIndex {
+        case 0:
+            selectedImage.image = UIImage(named: "skate")
+        case 1:
+            selectedImage.image = UIImage(named: "food")
+        case 2:
+            selectedImage.image = UIImage(named: "cat")
+        case 3:
+            selectedImage.image = UIImage(named: "nature")
+        default:
+            selectedImage.image = UIImage(named: "skate")
+        }
     }
 
 }
