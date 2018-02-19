@@ -11,6 +11,7 @@ import ReplayKit
 
 class ViewController: UIViewController {
     
+    //MARK: - IBOutlets
     
     @IBOutlet weak var statusLbl: UILabel!
     @IBOutlet weak var imagePicker: UISegmentedControl!
@@ -18,13 +19,18 @@ class ViewController: UIViewController {
     @IBOutlet weak var micSwitch: UISwitch!
     @IBOutlet weak var selectedImage: UIImageView!
     
+    //MARK: - Properties
     var recorder = RPScreenRecorder.shared()
     private var isRecording = false
+    
+    //MARK: - Class Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
     }
+    
+    //MARK: - Custom Methods
     
     func startRecording() {
         guard recorder.isAvailable else {
@@ -58,8 +64,49 @@ class ViewController: UIViewController {
     }
     
     func stopRecording() {
-        
+        recorder.stopRecording { (preview, error) in
+            guard preview != nil else {
+                print("Preview controller is not available")
+                return
+            }
+            
+            let alert = UIAlertController(title: "Recording Finished", message: "Would you like to edit or delete your recording?", preferredStyle: .alert)
+            let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
+                self.recorder.discardRecording {
+                    print("recording successfully discarded")
+                }
+            })
+            
+            let editAction = UIAlertAction(title: "Edit", style: .default, handler: { (action) in
+                preview?.previewControllerDelegate = self
+                if let unwrappedPreview = preview {
+                    unwrappedPreview.modalPresentationStyle = .popover
+                    unwrappedPreview.popoverPresentationController?.sourceView = self.view
+                    unwrappedPreview.preferredContentSize = CGSize(width: self.view.bounds.width / 1.2, height: self.view.bounds.height / 1.2)
+                    unwrappedPreview.popoverPresentationController?.sourceRect = CGRect(x: self.view.bounds.midX - 50, y: self.view.bounds.midY - 50, width: 100, height: 100)
+                    self.present(unwrappedPreview, animated: true, completion: nil)
+                    print("Entered edit mode")
+                }
+            })
+            
+            alert.addAction(deleteAction)
+            alert.addAction(editAction)
+            
+            self.present(alert, animated: true, completion: nil)
+            self.isRecording = false
+            self.viewReset()
+        }
     }
+    
+    func viewReset() {
+        micSwitch.isEnabled = true
+        statusLbl.text = "Ready to Record"
+        statusLbl.textColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        recordBtn.setTitle("Record", for: .normal)
+        recordBtn.setTitleColor(#colorLiteral(red: 0.1824951172, green: 0.7013234529, blue: 0.3100431561, alpha: 1), for: .normal)
+    }
+    
+    ///MARK: - IBActions
     
     @IBAction func recordBtnWasPressed(_ sender: Any) {
         if !isRecording {
@@ -84,5 +131,13 @@ class ViewController: UIViewController {
         }
     }
 
+}
+
+//MARK: - RPPreviewViewControllerDelegate
+
+extension ViewController: RPPreviewViewControllerDelegate {
+    func previewControllerDidFinish(_ previewController: RPPreviewViewController) {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
